@@ -17,7 +17,7 @@ let drawModule = (function () {
         ctx.fillText(score_text, 145, h-5);
     }
 
-    var paint = function () {
+    let paint = function () {
         ctx.fillStyle = 'lightgrey';
         ctx.fillRect(0, 0, w, h);
 
@@ -26,8 +26,8 @@ let drawModule = (function () {
 
         btn.setAttribute('disabled', true);
 
-        var snakeX = snake[0].x;
-        var snakeY = snake[0].y;
+        let snakeX = snake[0].x;
+        let snakeY = snake[0].y;
 
         if (direction == 'right') {
             snakeX++;
@@ -50,7 +50,7 @@ let drawModule = (function () {
         }
 
         if (snakeX == food.x && snakeY == food.y) {
-            var tail = {
+            let tail = {
                 x: snakeX,
                 y: snakeY
             };
@@ -58,14 +58,14 @@ let drawModule = (function () {
             score++;
             createFood();
         } else {
-            var tail = snake.pop();
+            let tail = snake.pop();
             tail.x = snakeX;
             tail.y = snakeY;
         }
 
         snake.unshift(tail);
 
-        for (var i = 0; i < snake.length; i++) {
+        for (let i = 0; i < snake.length; i++) {
             bodySnake(snake[i].x, snake[i].y);
         }
 
@@ -74,7 +74,7 @@ let drawModule = (function () {
         scoreText();
     }
 
-    var init = function () {
+    let init = function () {
         direction = 'down';
         drawSnake();
         createFood();
