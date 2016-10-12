@@ -1,28 +1,39 @@
 let drawModule = (function () {
+
     let bodySnake = function (x, y) {
         ctx.fillStyle = 'green';
         ctx.fillRect(x*snakeSize, y*snakeSize, snakeSize, snakeSize);
         ctx.strokeStyle = 'darkgreen';
         ctx.strokeRect(x*snakeSize, y*snakeSize, snakeSize, snakeSize);
     };
+
     let pizza = function(x, y) {
         ctx.fillStyle = 'yellow';
         ctx.fillRect(x*snakeSize, y*snakeSize, snakeSize,snakeSize);
         ctx.fillStyle = 'red';
         ctx.fillRect(x*snakeSize+1, y*snakeSize+1, snakeSize-2, snakeSize-2);
     };
+    
     let scoreText = function () {
         let score_text = "Score: " + score;
         ctx.fillStyle = 'blue';
         ctx.fillText(score_text, 145, h-5);
     };
 
+    let drawSnake = function () {
+        let length = 4;
+        snake = [];
+        for (let i = length-1; i >= 0; i--){
+            snake.push({x:i, y:0});
+        }
+    };
+
     let paint = function () {
         ctx.fillStyle = 'lightgrey';
-        ctx.fillRect(0, 0, w, h);
+        ctx.fillRect(0, 0, width, height);
 
         ctx.strokeStyle = 'black';
-        ctx.strokeRect(0, 0, w, h);
+        ctx.strokeRect(0, 0, width, height);
 
         btn.setAttribute('disabled', true);
 
@@ -39,17 +50,17 @@ let drawModule = (function () {
             snakeY++;
         }
 
-        if (snakeX == -1 || snakeX == w / snakeSize || snakeY == -1 || snakeY == h / snakeSize || check_collision(snakeX, snakeY, snake)) {
+        if (snakeX == -1 || snakeX == width / snakeSize || snakeY == -1 || snakeY == height / snakeSize || checkCollision(snakeX, snakeY, snake)) {
 
             btn.removeAttribute('disabled', true);
 
-            ctx.clearRect(0, 0, w, h);
+            ctx.clearRect(0, 0, width, height);
             gameloop = clearInterval(gameloop);
             return;
         }
-
+        let tail = {}
         if (snakeX == food.x && snakeY == food.y) {
-            let tail = {
+            tail = {
                 x: snakeX,
                 y: snakeY
             };
@@ -57,7 +68,7 @@ let drawModule = (function () {
             score++;
             createFood();
         } else {
-            let tail = snake.pop();
+            tail = snake.pop();
             tail.x = snakeX;
             tail.y = snakeY;
         }
@@ -71,14 +82,6 @@ let drawModule = (function () {
         pizza(food.x, food.y);
 
         scoreText();
-    };
-
-    let drawSnake = function () {
-        let length = 4;
-        snake = [];
-        for (let i = length; i >= 0; i--){
-            snake.push({x:i, y:0});
-        }
     };
 
     let createFood = function () {
@@ -104,6 +107,7 @@ let drawModule = (function () {
         }
         return false;
     };
+
     let init = function () {
         direction = 'down';
         drawSnake();
@@ -114,4 +118,5 @@ let drawModule = (function () {
     return {
         init: init
     };
+
 }());
