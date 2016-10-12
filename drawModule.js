@@ -85,6 +85,14 @@ let drawModule = (function () {
         init: init
     };
 
+    let drawSnake = function () {
+        let length = 4;
+        snake = [];
+        for (let i = length; i >= 0; i--){
+            snake.push({x:i, y:0});
+        }
+    };
+
     let createFood = function () {
         food = {
             x:Math.floor((Math.random()*30)+1),
@@ -98,6 +106,13 @@ let drawModule = (function () {
                 food.x = Math.floor((Math.random()*30)+1);
                 food.y = Math.floor((Math.random()*30)+1);
             }
+        }
+    }
+
+    let checkCollision = function (x, y, array) {
+        for (let i = 0; i < array.length; i++){
+            if (array[i].x === x && array[i].y === y)
+                return true;
         }
     }
 
