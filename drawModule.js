@@ -1,7 +1,4 @@
 let drawModule = (function () {
-
-    let backgroundImage = new Image();
-
     let bodySnake = function (x, y) {
         ctx.fillStyle = 'green';
         ctx.fillRect(x*snakeSize, y*snakeSize, snakeSize, snakeSize);
@@ -31,19 +28,18 @@ let drawModule = (function () {
     };
 
     let drawBackground = function() {
-        let context = document.getElementById("mycanvas").getContext("2d");
-        context.fillStyle = context.createPattern(backgroundImage, "no-repeat");
-        context.fillRect(0, 0, 800, 600);
+        ctx.fillStyle = ctx.createPattern(backgroundImage, "no-repeat");
+        ctx.fillRect(startWidth, 0, width, height);
     }
 
     let paint = function () {
-        backgroundImage.src = "images/background.png";
+        backgroundImage.src = backgroundImageSrc;
         backgroundImage.onload = drawBackground();
 
-        ctx.fillRect(0, 0, width, height);
+        ctx.fillRect(startWidth, startHeight, width, height);
 
         ctx.strokeStyle = 'black';
-        ctx.strokeRect(0, 0, width, height);
+        ctx.strokeRect(startWidth, startHeight, width, height);
 
         btn.setAttribute('disabled', true);
 
@@ -60,7 +56,7 @@ let drawModule = (function () {
             snakeY++;
         }
 
-        if (snakeX == -1 || snakeX == width / snakeSize || snakeY == -1 || snakeY == height / snakeSize || checkCollision(snakeX, snakeY, snake)) {
+        if (snakeX == -1 || snakeX == Math.floor(width / snakeSize) || snakeY == -1 || snakeY == Math.floor(height / snakeSize) || checkCollision(snakeX, snakeY, snake)) {
 
             btn.removeAttribute('disabled', true);
 
