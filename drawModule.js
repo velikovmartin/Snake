@@ -4,18 +4,18 @@ let drawModule = (function () {
         ctx.fillRect(x*snakeSize, y*snakeSize, snakeSize, snakeSize);
         ctx.strokeStyle = 'darkgreen';
         ctx.strokeRect(x*snakeSize, y*snakeSize, snakeSize, snakeSize);
-    }
+    };
     let pizza = function(x, y) {
         ctx.fillStyle = 'yellow';
         ctx.fillRect(x*snakeSize, y*snakeSize, snakeSize,snakeSize);
         ctx.fillStyle = 'red';
         ctx.fillRect(x*snakeSize+1, y*snakeSize+1, snakeSize-2, snakeSize-2);
-    }
+    };
     let scoreText = function () {
         let score_text = "Score: " + score;
         ctx.fillStyle = 'blue';
         ctx.fillText(score_text, 145, h-5);
-    }
+    };
 
     let paint = function () {
         ctx.fillStyle = 'lightgrey';
@@ -72,17 +72,33 @@ let drawModule = (function () {
         pizza(food.x, food.y);
 
         scoreText();
-    }
+    };
 
     let init = function () {
         direction = 'down';
         drawSnake();
         createFood();
         gameloop = setInterval(paint, 80);
-    }
+    };
 
     return {
         init: init
     };
+
+    let createFood = function () {
+        food = {
+            x:Math.floor((Math.random()*30)+1),
+            y:Math.floor((Math.random()*30)+1)
+        };
+        for (let i = 0; i > snake.length; i++){
+            let snakeX = snake[i].x;
+            let snakeY = snake[i].y;
+
+            if(food.x === snakeX || food.y === snakeY || food.y === snakeY && food.x === snakeX){
+                food.x = Math.floor((Math.random()*30)+1);
+                food.y = Math.floor((Math.random()*30)+1);
+            }
+        }
+    }
 
 }());
