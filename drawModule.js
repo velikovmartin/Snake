@@ -8,7 +8,7 @@ let drawModule = (function () {
     };
 
     let pizza = function(x, y) {
-        ctx.fillStyle = 'yellow';
+        ctx.fillStyle = 'orange';
         ctx.fillRect(x*snakeSize, y*snakeSize, snakeSize,snakeSize);
         ctx.fillStyle = 'red';
         ctx.fillRect(x*snakeSize+1, y*snakeSize+1, snakeSize-2, snakeSize-2);
@@ -17,7 +17,7 @@ let drawModule = (function () {
     let scoreText = function () {
         let score_text = "Score: " + score;
         ctx.fillStyle = 'blue';
-        ctx.fillText(score_text, 145, h-5);
+        ctx.fillText(score_text, 350, height-5);
     };
 
     let drawSnake = function () {
@@ -29,7 +29,7 @@ let drawModule = (function () {
     };
 
     let paint = function () {
-        ctx.fillStyle = 'lightgrey';
+        ctx.fillStyle = 'lightgreen';
         ctx.fillRect(0, 0, width, height);
 
         ctx.strokeStyle = 'black';
