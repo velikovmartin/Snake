@@ -1,5 +1,7 @@
 let drawModule = (function () {
 
+    let backgroundImage = new Image();
+
     let bodySnake = function (x, y) {
         ctx.fillStyle = 'green';
         ctx.fillRect(x*snakeSize, y*snakeSize, snakeSize, snakeSize);
@@ -28,8 +30,16 @@ let drawModule = (function () {
         }
     };
 
+    let drawBackground = function() {
+        let context = document.getElementById("mycanvas").getContext("2d");
+        context.fillStyle = context.createPattern(backgroundImage, "no-repeat");
+        context.fillRect(0, 0, 800, 600);
+    }
+
     let paint = function () {
-        ctx.fillStyle = 'lightgreen';
+        backgroundImage.src = "images/background.png";
+        backgroundImage.onload = drawBackground();
+
         ctx.fillRect(0, 0, width, height);
 
         ctx.strokeStyle = 'black';
