@@ -19,6 +19,22 @@ let drawModule = (function () {
         ctx.fillText(score_text, 350, height-5);
     };
 
+    let highScoreText = function () {
+
+        let highScoreText;
+
+        if(highScore <= score){
+            highScore = score;
+            ctx.fillStyle = 'yellow';
+            highScoreText = "NEW High Score: " + highScore;
+        } else {
+            ctx.fillStyle = 'maroon';
+            highScoreText = "High Score: " + highScore;
+        }
+
+        ctx.fillText(highScoreText, 580, height-5);
+    };
+
     let drawSnake = function () {
         let length = 4;
         snake = [];
@@ -57,7 +73,7 @@ let drawModule = (function () {
         }
 
         if (snakeX == -1 || snakeX == Math.floor(width / snakeSize) || snakeY == -1 || snakeY == Math.floor(height / snakeSize) || checkCollision(snakeX, snakeY, snake)) {
-
+            score = 0;
             btn.removeAttribute('disabled', true);
 
             ctx.clearRect(0, 0, width, height);
@@ -88,6 +104,7 @@ let drawModule = (function () {
         pizza(food.x, food.y);
 
         scoreText();
+        highScoreText();
     };
 
     let createFood = function () {

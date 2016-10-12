@@ -11,3 +11,4 @@ let snakeSize = 15;
 let food;
 let backgroundImage = new Image();
 let backgroundImageSrc = "images/background.png";
+let highScore=1;
