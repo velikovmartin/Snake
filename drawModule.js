@@ -39,7 +39,6 @@ let drawModule = (function () {
             snakeY++;
         }
 
-
         if (snakeX == -1 || snakeX == w / snakeSize || snakeY == -1 || snakeY == h / snakeSize || check_collision(snakeX, snakeY, snake)) {
 
             btn.removeAttribute('disabled', true);
@@ -74,17 +73,6 @@ let drawModule = (function () {
         scoreText();
     };
 
-    let init = function () {
-        direction = 'down';
-        drawSnake();
-        createFood();
-        gameloop = setInterval(paint, 80);
-    };
-
-    return {
-        init: init
-    };
-
     let drawSnake = function () {
         let length = 4;
         snake = [];
@@ -107,13 +95,23 @@ let drawModule = (function () {
                 food.y = Math.floor((Math.random()*30)+1);
             }
         }
-    }
+    };
 
     let checkCollision = function (x, y, array) {
         for (let i = 0; i < array.length; i++){
             if (array[i].x === x && array[i].y === y)
-                return true;
+            return true;
         }
-    }
+        return false;
+    };
+    let init = function () {
+        direction = 'down';
+        drawSnake();
+        createFood();
+        gameloop = setInterval(paint, 80);
+    };
 
+    return {
+        init: init
+    };
 }());
